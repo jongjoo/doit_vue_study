@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue Sample</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>1번째 인스턴트</h2>
+      <div>
+        {{message}}
+      </div>
+      <button>컴포넌트 등록</button>
+      <my-global-component></my-global-component>
+      <my-local-component></my-local-component>
+    </div>
+    <div id="app2">
+      <h2>2번째 인스턴</h2>
+      <my-global-component></my-global-component>
+      <my-local-component></my-local-component>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script>
+      Vue.component('my-global-component',{
+        template: '<div>전역 컴포넌트가 등록되었습니다!</div>'
+      }); 
+
+      var cmp = {
+        template : '<div>지역 컴포넌트 </div>'
+      };
+
+      new Vue({
+        el: '#app',
+        components: {
+          'my-local-component' : cmp
+        },
+        data: {
+          message: 'Hello Vue.js!'
+        },
+        beforeCreate: function(){
+          console.log("beforeCreate");
+        },
+        created: function(){
+          console.log("created");
+        },
+        mounted: function(){
+          console.log("mounted");
+          this.message = 'Hello Vue!';
+        },
+        updated: function(){
+          console.log("updated");
+        }
+      });
+
+      new Vue({
+        el: '#app2'
+      })
+    </script>
+  </body>
+</html>
