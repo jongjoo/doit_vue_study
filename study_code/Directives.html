@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+    <div id="app">
+      <a v-if="flag">v-if Flag = Ture</a>
+      <ul>
+        <li v-for="system in systems">{{system}}</li>
+      </ul>
+      <p v-show="flag">v-show Flag = Ture</p>
+      <h5 v-bind:id="uid">v-bind:id</h5>
+      <button v-on:click="popupAlert(10)">버튼</button>
+
+      <!-- computed 사용. -->
+      <p>{{ reversedMessage }}</p>
+
+      <!-- watch 사용 -->
+      <input v-model="watch_message">
+    </div>
+
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          flag : true, // false
+          systems : [
+          'android', 'ios', 'window'
+        ],
+        uid : 10,
+        message: "Hello Vue",
+        watch_message : "Hello Watch"
+      },
+      // v-on:click 클릭 이벤트.
+      methods: {
+        popupAlert: function(res){
+          this.flag ? this.flag = false : this.flag = true;
+
+          return alert("event = "+res);
+        }
+      },
+      computed: {
+        reversedMessage: function(){
+          return this.message.split('').reverse().join('');
+        }
+      },
+      watch: {
+        watch_message: function(data){
+          console.log(data);
+        }
+      }
+    });
+    </script>
+  </body>
+</html>

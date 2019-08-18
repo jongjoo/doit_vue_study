@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>엑시오스(axios) 사용기.</title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <!-- 액시오스 라이브러리. -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- axios 는 axios.get('URL').then().catch() 와 같이 이루어짐.
+       then은 성공시 // catch는 실패시 응답.-->
+    <div id="app">
+      <button v-on:click="getData">get FrameWork</button>
+    </div>
+      <script>
+        new Vue({
+          el: '#app',
+          methods: {
+            getData: function(){
+              axios.get('https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json')
+              .then(function(response){
+                console.log(response);
+              }).catch(function(res){
+                console.log(res);
+              });
+            }
+          }
+        });
+      </script>
+
+  </body>
+</html>
